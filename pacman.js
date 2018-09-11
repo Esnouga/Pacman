@@ -96,3 +96,22 @@ function desenharTudo() {
 		ghosts[i].desenhar(ctx);
 	}
 }
+document.onkeydown = onKD; //Eventos de tecla para método onKD
+var setaCima = false;
+var setaBaixo = false;
+var setaEsquerda = false;
+var setaDireita = false;
+function onKD(evt) {
+	if (evt.keyCode == Teclas.direita) {
+	setaDireita = true;
+	}
+	if (evt.keyCode == Teclas.esquerda) {
+	setaEsquerda = true;
+	}
+	if (evt.keyCode == Teclas.cima) {
+	setaCima = true;
+	}
+	if (evt.keyCode == Teclas.baixo) {
+	setaBaixo = true;
+	}
+}
