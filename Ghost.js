@@ -13,3 +13,10 @@ var Ghost = function(x, y, cor) {
 		largura, largura);
 	}
 }
+//Elementos estáticos da classe Ghost
+Ghost.cores = new Array();
+Ghost.cores.push("rgba( 85, 238, 85, 0.85)");
+Ghost.cores.push("rgba( 85, 238, 238, 0.85)");
+Ghost.cores.push("rgba(238, 238, 85, 0.85)");
+Ghost.cores.push("rgba(238, 85, 85, 0.85)");
+Ghost.cores.push("rgba(238, 85, 238, 0.85)");
