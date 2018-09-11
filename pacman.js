@@ -86,3 +86,13 @@ function novoJogo() {
 		}
 	}
 }
+function desenharTudo() {
+//Cenário
+//...
+//Pacman
+...
+//Fantasmas
+	for (i = 0; i < ghosts.length; i++) {
+		ghosts[i].desenhar(ctx);
+	}
+}
