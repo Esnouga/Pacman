@@ -70,3 +70,19 @@ function desenharTudo() {
 	ctx.closePath();
 	ctx.fill();
 }
+var ghosts = new Array(); //Armazena referencias dos Ghosts
+function novoJogo() {
+	ghosts.length = 0;
+	var nGhosts = 0;
+	for (y = 0; y < ny; y++) {
+		for (x = 0; x < nx; x++) {
+			if (Cenario.mapa[y][x] == Cenario.pacman) {
+			...
+			}
+			if (Cenario.mapa[y][x] == Cenario.ghost) {
+				ghosts.push(new Ghost(x, y,
+				Ghost.cores[nGhosts++]));
+			}
+		}
+	}
+}
