@@ -133,3 +133,19 @@ function moverPacman() {
 	py++;
 	}
 }
+function moverPacman() {
+	if (setaDireita) {
+	setaDireita = false;
+		if (px + 1 < nx) {
+			if (Cenario.mapa[py][px + 1] != Cenario.parede) {
+				px++;
+			}
+		} 	
+		else if (Cenario.mapa[py][0] != Cenario.parede) {
+			px = 0;
+		}
+	}
+...
+...
+...
+}
