@@ -10,3 +10,9 @@ Cenario.ponto = 5;
 Cenario.mapa = null;
 //Largura de cada elemento da matriz
 var largura = 30;
+var Teclas = function () {
+}
+Teclas.cima = 38;
+Teclas.baixo = 40;
+Teclas.esquerda = 37;
+Teclas.direita = 39;
