@@ -115,3 +115,21 @@ function onKD(evt) {
 	setaBaixo = true;
 	}
 }
+function moverPacman() {
+	if (setaDireita) {
+	setaDireita = false;
+	px++;
+	}
+	if (setaEsquerda) {
+	setaEsquerda = false;
+	px--;
+	}
+	if (setaCima) {
+	setaCima = false;
+	py--;
+	}
+	if (setaBaixo) {
+	setaBaixo = false;
+	py++;
+	}
+}
