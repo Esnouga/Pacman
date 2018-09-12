@@ -271,3 +271,9 @@ function gameOver() {
 	btPausa.disabled = true;
 	btPausa.innerHTML = "Game Over!";
 }
+//Recuperando referência dos objetos no documento
+var canvas = document.getElementById("tela");
+var ctx = canvas.getContext("2d");
+var btPausa = document.getElementById("btPausa");
+var btNovo = document.getElementById("btNovo");
+var audioWaka = document.getElementById("waka");
