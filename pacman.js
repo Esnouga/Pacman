@@ -2,6 +2,9 @@ var canvas = document.getElementById("tela");
 var ctx = canvas.getContext("2d");
 var btPausa = document.getElementById("btPausa");
 var btNovo = document.getElementById("btNovo");
+var intervalo = 200;
+var relogio = null;
+var relogioGhosts = null;
 
 var nx = 0, ny = 0; //Número de colunas e linhas
 function novoJogo() {
@@ -197,6 +200,74 @@ function moverPacman() {
 		}
 	}
 }
-
-
-
+function moverGhosts() {
+	for (i = 0; i < ghosts.length; i++) {
+		ghosts[i].mover();
+	}
+}
+	
+function pausar() {
+	if (relogio != null) {
+		clearInterval(relogio);
+		clearInterval(relogioGhosts);
+		relogio = null;
+		relogioGhosts = null;
+		btPausa.innerHTML = "Continuar";
+	} else {
+		relogio = setInterval("atualizaPacman()", intervalo);
+		relogioGhosts = setInterval("atualizaGhosts()",
+		Math.round(intervalo * 1.2));
+		btPausa.innerHTML = "Pausar";
+	}
+}
+function atualizaGhosts() {
+	moverGhosts();
+	desenharTudo();
+}
+function atualizaPacman() {
+	moverPacman();
+	desenharTudo();
+}
+function atualizaGhosts() {
+	moverGhosts();
+		if (verificaColisoes()) {
+			gameOver();
+	}
+	desenharTudo();
+}
+function atualizaPacman() {
+	moverPacman();
+		if (verificaColisoes()) {
+		gameOver();
+	}
+	desenharTudo();
+}
+//Retorna verdadeiro para o caso de Game Over
+function verificaColisoes() {
+	//Comer ponto?
+	if (Cenario.mapa[py][px] == Cenario.ponto) {
+		Cenario.mapa[py][px] = Cenario.vazio;
+		//Ponto do poder?
+	} else if (Cenario.mapa[py][px] == Cenario.poder) {
+		Cenario.mapa[py][px] = Cenario.vazio;
+		for (i = 0; i < ghosts.length; i++) {
+		ghosts[i].assustar();
+		}
+	} //Fim do else if
+	//Colisão com fantasmas
+	for (i = 0; i < ghosts.length; i++) {
+		if (px == ghosts[i].x && py == ghosts[i].y) {
+			if (ghosts[i].assustado == 0) {
+			return true;
+			} else {
+				ghosts[i].devorado();
+			}
+		}
+	}
+	return false;
+} //Fim da função
+function gameOver() {
+	pausar();
+	btPausa.disabled = true;
+	btPausa.innerHTML = "Game Over!";
+}
