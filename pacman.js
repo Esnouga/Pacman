@@ -165,3 +165,38 @@ function moverPacman() {
 ...
 ...
 }
+function moverPacman() {
+...
+...
+	if (setaCima) {
+		setaCima = false;
+		if (py - 1 >= 0) {
+			if (Cenario.mapa[py - 1][px] != Cenario.parede) {
+				py--;
+			}
+		} 
+		else if (Cenario.mapa[ny - 1][px] != Cenario.parede) {
+		py = ny - 1;
+		}
+	}
+...
+}
+function moverPacman() {
+...
+...
+...
+	if (setaBaixo) {
+		setaBaixo= false;
+		if (py + 1 < ny) {
+			if (Cenario.mapa[py + 1][px] != Cenario.parede) {
+				py++;
+			}
+		} 
+		else if (Cenario.mapa[0][px] != Cenario.parede) {
+		py = 0;
+		}
+	}
+}
+
+
+
