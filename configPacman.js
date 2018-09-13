@@ -6,13 +6,16 @@ Cenario.poder = 2;
 Cenario.ghost = 3;
 Cenario.pacman = 4;
 Cenario.ponto = 5;
-//Armazena cópia do cenário
+
 Cenario.mapa = null;
-//Largura de cada elemento da matriz
+
 var largura = 30;
-var Teclas = function () {
+
+//Direcoes
+var Direcao = function(){
 }
-Teclas.cima = 38;
-Teclas.baixo = 40;
-Teclas.esquerda = 37;
-Teclas.direita = 39;
+Direcao.naoDefinida = -1;
+Direcao.cima = 0;
+Direcao.baixo = 1;
+Direcao.esquerda = 2;
+Direcao.direita = 3;
