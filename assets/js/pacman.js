@@ -9,6 +9,19 @@ var relogio = null;
 var relogioGhosts = null;
 
 var nx = 0, ny = 0; //Número de colunas e linhas
+var pacManR = new Image();
+pacManR.src = "assets/img/pacR.png";
+
+var pacManL = new Image();
+pacManL.src = "assets/img/pacL.png";
+
+var pacManU = new Image();
+pacManU.src = "assets/img/pacU.png";
+
+var pacManD = new Image();
+pacManD.src = "assets/img/pacD.png";
+
+var desenhoPac = pacManR;
 
 var px = -1, py = -1;
 var ghosts = new Array(); //Armazena referencias dos Ghosts
@@ -66,13 +79,7 @@ function desenharTudo() {
 		} //else if & for x
 	}
 	//Pacman
-	ctx.fillStyle = "#FFB00F";
-	ctx.beginPath();
-	ctx.arc(px * largura + (largura / 2), py * largura +
-		(largura / 2), largura / 2, Math.PI * 2, false);
-	ctx.closePath();
-	ctx.fill();
-
+    ctx.drawImage(desenhoPac, px * largura, py * largura, largura, largura);
 	//Fantasmas
 	for (i = 0; i < ghosts.length; i++) {
 		ghosts[i].desenhar(ctx);
@@ -103,6 +110,7 @@ function onKD(evt) {
 
 function moverPacman() {
     if (setaDireita) {
+        desenhoPac = pacManR
         setaDireita = false;
         if (px + 1 < nx) {
             if (Cenario.mapa[py][px + 1] != Cenario.parede) {
@@ -113,6 +121,7 @@ function moverPacman() {
         }
     }
     if (setaEsquerda) {
+        desenhoPac = pacManL;
         setaEsquerda = false;
         if (px - 1 >= 0) {
             if (Cenario.mapa[py][px - 1] != Cenario.parede) {
@@ -123,6 +132,7 @@ function moverPacman() {
         }
     }
     if (setaCima) {
+        desenhoPac = pacManU;
         setaCima = false;
         if (py - 1 >= 0) {
             if (Cenario.mapa[py - 1][px] != Cenario.parede) {
@@ -133,6 +143,7 @@ function moverPacman() {
         }
     }
     if (setaBaixo) {
+        desenhoPac = pacManD;
         setaBaixo = false;
         if (py + 1 < ny) {
             if (Cenario.mapa[py + 1][px] != Cenario.parede) {
