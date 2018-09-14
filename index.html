@@ -5,7 +5,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Pac-MAN</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="estilo.css"/>
+	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css"/>
+	<script type="text/javascript" src="assets/js/cenarioCriado.js"></script>
+	<script type="text/javascript" src="assets/js/configPacman.js"></script>
+	<script type="text/javascript" src="assets/js/Ghost.js"></script>
 </head>
 <body>
 	<div>
@@ -15,9 +18,10 @@
 		<button type="button" onclick="pausar()" id="btPausa">Iniciar</button>
 		<button type="button" onclick="novoJogo()" id="btNovo">Novo Jogo</button>
 	</div>
-	<script type="text/javascript" src="Ghost.js"></script>
-	<script type="text/javascript" src="cenarioCriado.js"></script>
-	<script type="text/javascript" src="configPacman.js"></script>
-	<script type="text/javascript" src="pacman.js"></script>
+	<audio controls id="waka">
+		<source src="snd/waka.mp_" type="audio/mpeg">
+		<source src="snd/waka.ogg" type="audio/ogg">
+	</audio>
+	<script type="text/javascript" src="assets/js/pacman.js"></script>
 </body>
 </html>
