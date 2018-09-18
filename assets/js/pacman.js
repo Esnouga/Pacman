@@ -1,3 +1,4 @@
+var score = 0;
 var canvas = document.getElementById('tela');
 var ctx = canvas.getContext("2d");
 var btPausa = document.getElementById("btPausa");
@@ -26,6 +27,9 @@ var desenhoPac = pacManR;
 var px = -1, py = -1;
 var ghosts = new Array(); //Armazena referencias dos Ghosts
 function novoJogo() {
+    pausar();
+    score = 0;
+    document.getElementById("score").innerHTML = score;
 	Cenario.mapa = new Array();
 	for (i = 0; i < cenarioCriado.length; i++) {
 		Cenario.mapa.push(cenarioCriado[i].slice(0));
@@ -196,6 +200,8 @@ function verificaColisoes() {
 //Comer ponto?
     if (Cenario.mapa[py][px] == Cenario.ponto) {
         Cenario.mapa[py][px] = Cenario.vazio;
+        score = score + 1;
+        document.getElementById("score").innerHTML = score;
 //Ponto do poder?
     } else if (Cenario.mapa[py][px] == Cenario.poder) {
         Cenario.mapa[py][px] = Cenario.vazio;
@@ -220,4 +226,6 @@ function gameOver() {
     pausar();
     btPausa.disabled = true;
     btPausa.innerHTML = "Game Over!";
+    score = 0;
+    document.getElementById("score").innerHTML = score;
 }

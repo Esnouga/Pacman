@@ -1,3 +1,14 @@
+
+@font-face {
+    font-family: SpriteComic;
+    src: url(../fonts/SpriteComic.otf);
+}
+
+@font-face {
+    font-family: SpriteComic;
+    src: url(../fonts/SpriteComic.ttf);
+}
+
 body{
 	background-color: #DDFFDD;
 	text-align: center;
@@ -19,4 +30,16 @@ button:hover{background-color:#BBBBFF;}
 button:disabled{
 	background-color: #DDDDDD;
 	cursor: not-allowed;
+}
+
+#score{
+	position: absolute;
+	top: -5px;
+	left: 30%;
+	font-size: 22px;
+	font-family: SpriteComic
+}
+
+audio{
+	display: none;
 }
