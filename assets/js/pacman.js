@@ -65,16 +65,18 @@ ponto.src = "assets/img/ponto.png";
 var poder = new Image();
 poder.onload = desenharTudo;
 poder.src = "assets/img/poder.png";
+var parede = new Image();
+parede.onload = desenharTudo;
+parede.src = "assets/img/parede.png"
 
 function desenharTudo() {
 	//Limpar a tela
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//Cenário
-	ctx.fillStyle = "#9999EE";
 	for (y = 0; y < ny; y++) {
 		for (x = 0; x < nx; x++) {
 			if (Cenario.mapa[y][x] == Cenario.parede) {
-				ctx.fillRect(x * largura, y * largura, largura, largura);
+				ctx.drawImage(parede, x * largura, y * largura, largura, largura);
 			} else if (Cenario.mapa[y][x] == Cenario.ponto) {
 				ctx.drawImage(ponto, x * largura, y * largura, largura, largura);
 			} else if (Cenario.mapa[y][x] == Cenario.poder) {
@@ -200,12 +202,15 @@ function verificaColisoes() {
 //Comer ponto?
     if (Cenario.mapa[py][px] == Cenario.ponto) {
         Cenario.mapa[py][px] = Cenario.vazio;
-        score = score + 1;
+        score = score + 10;
         document.getElementById("score").innerHTML = score;
 //Ponto do poder?
     } else if (Cenario.mapa[py][px] == Cenario.poder) {
+        score = score + 50;
+        document.getElementById("score").innerHTML = score;
         Cenario.mapa[py][px] = Cenario.vazio;
         for (i = 0; i < ghosts.length; i++) {
+
             ghosts[i].assustar();
         }
     } //Fim do else if
@@ -215,6 +220,8 @@ function verificaColisoes() {
             if (ghosts[i].assustado == 0) {
                 return true;
             } else {
+                score = score + 200;
+                document.getElementById("score").innerHTML = score;
                 ghosts[i].devorado();
             }
         }
