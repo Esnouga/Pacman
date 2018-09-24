@@ -19,10 +19,22 @@
 		<button type="button" onclick="pausar()" id="btPausa">Iniciar</button>
 		<button type="button" onclick="novoJogo()" id="btNovo">Novo Jogo</button>
 	</div>
-	<audio controls id="waka">
-		<source src="snd/waka.mp_" type="audio/mpeg">
+	<audio controls loop id="waka" allow="autoplay">
 		<source src="snd/waka.ogg" type="audio/ogg">
 	</audio>
+	<audio controls id="intro">
+		<source src="snd/intro.mp3" type="audio/mp3">
+	</audio>
+	<audio controls id="pacDie">
+		<source src="snd/die.ogg" type="audio/ogg">
+		<source src="snd/die.mp3" type="audio/mp3">
+	</audio>
+
+	<audio controls id="eatGhost">
+		<source src="snd/eatghost.ogg" type="audio/ogg">
+		<source src="snd/eatghost.mp3" type="audio/mp3">
+	</audio>
+
 	<script type="text/javascript" src="assets/js/pacman.js"></script>
 </body>
 </html>

@@ -1,11 +1,16 @@
 var score = 0;
+var paused = false;
 var canvas = document.getElementById('tela');
 var ctx = canvas.getContext("2d");
 var btPausa = document.getElementById("btPausa");
 var btNovo = document.getElementById("btNovo");
 var audioWaka = document.getElementById("waka");
+var introMusic = document.getElementById("intro");
+var audioPacDie = document.getElementById("pacDie");
+var audioEatGhost = document.getElementById("eatGhost");
+
+introMusic.currentTime = 0;
 audioWaka.currentTime = 0;
-audioWaka.play();
 var relogio = null;
 var relogioGhosts = null;
 
@@ -26,20 +31,28 @@ var desenhoPac = pacManR;
 
 var px = -1, py = -1;
 var ghosts = new Array(); //Armazena referencias dos Ghosts
+
 function novoJogo() {
+    paused = true;
+    var score = 0;
+    resetSoms();
+    introMusic.play();
     pausar();
-    score = 0;
     document.getElementById("score").innerHTML = score;
-	Cenario.mapa = new Array();
+    score = 0;
+    Cenario.mapa = new Array();
+
 	for (i = 0; i < cenarioCriado.length; i++) {
 		Cenario.mapa.push(cenarioCriado[i].slice(0));
-	}
+    }
+    
 	nx = Cenario.mapa[0].length;
 	ny = Cenario.mapa.length;
 	canvas.width = nx * largura;
 	canvas.height = ny * largura;
-	ghosts.length = 0;
-	var nGhosts = 0;
+    ghosts.length = 0;
+    
+    var nGhosts = 0;
 	for (y = 0; y < ny; y++) {
 		for (x = 0; x < nx; x++) {
 			if (Cenario.mapa[y][x] == Cenario.pacman) {
@@ -52,11 +65,15 @@ function novoJogo() {
 			}
 					
 		}
-	}
-			
-	btPausa.disabled = false;
-	btPausa.innerHTML = "Iniciar";
-	desenharTudo();
+    }
+
+    desenharTudo();
+
+    introMusic.addEventListener('ended', function() {
+        retomar();
+        audioWaka.play();
+        btPausa.disabled = false;
+    },false);	
 }
 
 var ponto = new Image();
@@ -93,7 +110,7 @@ function desenharTudo() {
 			
 } //for y & function
 
-novoJogo();
+
 document.onkeydown = onKD; //Eventos de tecla para método onKD
 var setaCima = false;
 var setaBaixo = false;
@@ -168,18 +185,27 @@ function moverGhosts() {
 }
 
 function pausar() {
-    if (relogio != null) {
-        clearInterval(relogio);
-        clearInterval(relogioGhosts);
-        relogio = null;
-        relogioGhosts = null;
-        btPausa.innerHTML = "Continuar";
+    clearInterval(relogio);
+    clearInterval(relogioGhosts);
+    relogio = null;
+    relogioGhosts = null;
+    btPausa.innerHTML = "Continuar";
+    audioWaka.pause();
+    paused = true;
+}
+
+function retomar(){
+    relogio = setInterval("atualizaPacman()", intervalo);
+    relogioGhosts = setInterval("atualizaGhosts()",
+        Math.round(intervalo * 1.2));
+    btPausa.innerHTML = "Pausar";
+
+    if (audioWaka.duration > 0 && !audioWaka.paused) {
+        audioWaka.pause();
     } else {
-        relogio = setInterval("atualizaPacman()", intervalo);
-        relogioGhosts = setInterval("atualizaGhosts()",
-            Math.round(intervalo * 1.2));
-        btPausa.innerHTML = "Pausar";
+        audioWaka.play();
     }
+    paused = false;
 }
 
 function atualizaGhosts() {
@@ -192,6 +218,8 @@ function atualizaGhosts() {
 function atualizaPacman() {
     moverPacman();
     if (verificaColisoes()) {
+        pararSom();
+        audioPacDie.play();
         gameOver();
     }
     desenharTudo();
@@ -222,6 +250,7 @@ function verificaColisoes() {
             } else {
                 score = score + 200;
                 document.getElementById("score").innerHTML = score;
+                audioEatGhost.play();
                 ghosts[i].devorado();
             }
         }
@@ -235,4 +264,18 @@ function gameOver() {
     btPausa.innerHTML = "Game Over!";
     score = 0;
     document.getElementById("score").innerHTML = score;
+}
+
+function pararSom(){
+    audioEatGhost.pause();
+    audioPacDie.pause();
+    audioWaka.pause();
+    introMusic.pause();
+}
+
+function resetSoms(){
+    audioEatGhost.currentTime = 0;
+    audioPacDie.currentTime = 0;
+    audioWaka.currentTime = 0;
+    introMusic.currentTime = 0;
 }
