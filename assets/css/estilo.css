@@ -35,11 +35,36 @@ button:disabled{
 #score{
 	position: absolute;
 	top: -5px;
-	left: 30%;
+	left: 10%;
 	font-size: 22px;
 	font-family: SpriteComic
 }
 
+.scoreLetter{
+	position: absolute;
+	top: 17px;
+	left: 2%;
+	font-size: 22px;
+	font-family: SpriteComic;
+	box-shadow: 0 0 black;
+}
+
 audio{
 	display: none;
+}
+
+.gameOverDisplayNone{
+	display: none;
+	position: absolute;
+	z-index: 40;
+	top: 100px;
+	left: 500px;
+}
+
+.gameOverDisplayShow{
+	display: block;
+	position: absolute;
+	z-index: 40;
+	top: 100px;
+	left: 500px;
 }

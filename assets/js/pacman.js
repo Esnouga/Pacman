@@ -1,5 +1,5 @@
 var score = 0;
-var paused = false;
+var paused = true;
 var canvas = document.getElementById('tela');
 var ctx = canvas.getContext("2d");
 var btPausa = document.getElementById("btPausa");
@@ -33,12 +33,13 @@ var px = -1, py = -1;
 var ghosts = new Array(); //Armazena referencias dos Ghosts
 
 function novoJogo() {
-    paused = true;
+    pausar();
     var score = 0;
     resetSoms();
     introMusic.play();
-    pausar();
     document.getElementById("score").innerHTML = score;
+    document.querySelector('#gameOver').classList.remove('gameOverDisplayShow');
+    document.querySelector('#gameOver').classList.add('gameOverDisplayNone');
     score = 0;
     Cenario.mapa = new Array();
 
@@ -70,7 +71,7 @@ function novoJogo() {
     desenharTudo();
 
     introMusic.addEventListener('ended', function() {
-        retomar();
+        startStop();
         audioWaka.play();
         btPausa.disabled = false;
     },false);	
@@ -84,7 +85,7 @@ poder.onload = desenharTudo;
 poder.src = "assets/img/poder.png";
 var parede = new Image();
 parede.onload = desenharTudo;
-parede.src = "assets/img/parede.png"
+parede.src = "assets/img/parede.png";
 
 function desenharTudo() {
 	//Limpar a tela
@@ -208,6 +209,13 @@ function retomar(){
     paused = false;
 }
 
+function startStop(){
+    if(paused){
+        retomar();
+    }else{
+        pausar();
+    }
+}
 function atualizaGhosts() {
     moverGhosts();
     if (verificaColisoes()) {
@@ -264,6 +272,8 @@ function gameOver() {
     btPausa.innerHTML = "Game Over!";
     score = 0;
     document.getElementById("score").innerHTML = score;
+    document.querySelector('#gameOver').classList.remove('gameOverDisplayNone');
+    document.querySelector('#gameOver').classList.add('gameOverDisplayShow');
 }
 
 function pararSom(){

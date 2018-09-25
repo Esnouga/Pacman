@@ -149,7 +149,7 @@ var Ghost = function(x, y, imagem){
 
 }
 //Elementos estáticos da classe Ghost
-Ghost.chanceMovIgual = 0.50;
+Ghost.chanceMovIgual = 0.40;
 Ghost.imagem = new Array();
 var ghost = new Image();
 ghost.src = "assets/img/fantasma1.png";

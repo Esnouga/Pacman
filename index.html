@@ -6,17 +6,17 @@
 	<title>Pac-MAN</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css"/>
-	<script type="text/javascript" src="assets/js/cenarioCriado.js"></script>
-	<script type="text/javascript" src="assets/js/configPacman.js"></script>
-	<script type="text/javascript" src="assets/js/Ghost.js"></script>
 </head>
 <body>
 	<div>
-		<canvas id="tela" width="400" height="400">Navegador não suportado</canvas>
+		<canvas id="tela" width="872" height="632">Navegador não suportado</canvas>
 	</div>
 	<div>
-		<p id="score"></p>
-		<button type="button" onclick="pausar()" id="btPausa">Iniciar</button>
+		<label class="scoreLetter" for="score">SCORE</label>
+		<p id="score">0</p>
+	</div>
+	<div>
+		<button type="button" onclick="startStop()" id="btPausa">Iniciar</button>
 		<button type="button" onclick="novoJogo()" id="btNovo">Novo Jogo</button>
 	</div>
 	<audio controls loop id="waka" allow="autoplay">
@@ -35,6 +35,11 @@
 		<source src="snd/eatghost.mp3" type="audio/mp3">
 	</audio>
 
+	<img id="gameOver" class="gameOverDisplayNone" src="assets/img/gameover.gif">
+
+	<script type="text/javascript" src="assets/js/Ghost.js"></script>
+	<script type="text/javascript" src="assets/js/cenarioCriado.js"></script>
+	<script type="text/javascript" src="assets/js/configPacman.js"></script>
 	<script type="text/javascript" src="assets/js/pacman.js"></script>
 </body>
 </html>
