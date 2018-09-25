@@ -35,9 +35,10 @@ button:disabled{
 #score{
     position: relative;
     top: -12px;
-    left: -37%;
-	font-size: 22px;
-	font-family: SpriteComic
+    padding-left: 20px;
+    text-align: left;
+    font-size: 22px;
+    font-family: SpriteComic;
 }
 
 .scoreLetter{
