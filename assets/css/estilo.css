@@ -33,20 +33,30 @@ button:disabled{
 }
 
 #score{
-	position: absolute;
-	top: -5px;
-	left: 10%;
+    position: relative;
+    top: -12px;
+    left: -37%;
 	font-size: 22px;
 	font-family: SpriteComic
 }
 
 .scoreLetter{
-	position: absolute;
-	top: 17px;
-	left: 2%;
-	font-size: 22px;
-	font-family: SpriteComic;
-	box-shadow: 0 0 black;
+    position: relative;
+    top: 21px;
+    left: -2.25%;
+    font-size: 22px;
+    font-family: SpriteComic;
+}
+
+.scoreCard{
+    position: absolute;
+    background-image: url("../img/uiScore.png");
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 200px;
+    top: 17px;
+    left: 4%;
+    box-shadow: 0 0 black;
 }
 
 audio{

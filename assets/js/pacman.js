@@ -72,6 +72,9 @@ function novoJogo() {
 
     introMusic.addEventListener('ended', function() {
         startStop();
+        if(paused){
+            retomar();
+        }
         audioWaka.play();
         btPausa.disabled = false;
     },false);	
