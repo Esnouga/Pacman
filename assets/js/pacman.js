@@ -208,7 +208,7 @@ function pausar() {
 function retomar(){
     relogio = setInterval("atualizaPacman()", intervalo);
     relogioGhosts = setInterval("atualizaGhosts()",
-        Math.round(intervalo * 1.2));
+        Math.round(intervalo * 0.2));
     btPausa.innerHTML = "Pausar";
 
     if (audioWaka.duration > 0 && !audioWaka.paused) {

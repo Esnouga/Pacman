@@ -37,18 +37,19 @@ button:disabled{
 #score{
     position: relative;
     top: -12px;
-    padding-left: 20px;
     text-align: left;
     font-size: 22px;
-    font-family: SpriteComic;
+	font-family: SpriteComic;
+	text-align: center !important;
 }
 
 .scoreLetter{
     position: relative;
     top: 21px;
     left: -2.25%;
-    font-size: 22px;
-    font-family: SpriteComic;
+	font-size: 22px;
+	text-align: center;
+	font-family: SpriteComic;
 }
 
 .scoreCard{
@@ -89,8 +90,10 @@ audio{
 
 .shortcut-and-info{
 	position: absolute;
+	width: 300px;
 	right: 20px;
 	top: 1%;
+	white-space: normal !important
 }
 
 .shortcuts{
