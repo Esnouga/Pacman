@@ -42,15 +42,7 @@ function initGame() {
     qtdPontos = 0;
     Cenario.mapa = new Array();
 
-    for (i = 0; i < cenarioCriado.length; i++) {
-        Cenario.mapa.push(cenarioCriado[i].slice(0));
-    }
-
-    nx = Cenario.mapa[0].length;
-    ny = Cenario.mapa.length;
-    canvas.width = nx * largura;
-    canvas.height = ny * largura;
-    ghosts.length = 0;
+    novaFase();
 
     var nGhosts = 0;
     for (y = 0; y < ny; y++) {
@@ -258,6 +250,32 @@ function atualizaPacman() {
 function winGame() {
     pausar();
     initGame();
+}
+
+ //Troca de fase
+function novaFase(){
+    var escolhaRandom = Math.floor(Math.random() * (3 - 1)) + 1;
+     if(escolhaRandom == 1){
+        for (i = 0; i < cenarioCriado.length; i++) {
+            Cenario.mapa.push(cenarioCriado[i].slice(0));
+        }
+    
+        nx = Cenario.mapa[0].length;
+        ny = Cenario.mapa.length;
+        canvas.width = nx * largura;
+        canvas.height = ny * largura;
+        ghosts.length = 0;
+    } else if(escolhaRandom == 2){
+        for (i = 0; i < cenarioCriado.length; i++) {
+            Cenario.mapa.push(cenarioCriado1[i].slice(0));
+        }
+    
+        nx = Cenario.mapa[0].length;
+        ny = Cenario.mapa.length;
+        canvas.width = nx * largura;
+        canvas.height = ny * largura;
+        ghosts.length = 0;
+    }
 }
 
 //Retorna verdadeiro para o caso de Game Over
