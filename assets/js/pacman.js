@@ -10,7 +10,7 @@ var audioPacDie = document.getElementById("pacDie");
 var audioEatGhost = document.getElementById("eatGhost");
 var score = 0;
 var qtdPontos = 0;
-
+var velocidadeFantasma = 1.2;
 introMusic.currentTime = 0;
 audioWaka.currentTime = 0;
 var relogio = null;
@@ -208,7 +208,7 @@ function pausar() {
 function retomar(){
     relogio = setInterval("atualizaPacman()", intervalo);
     relogioGhosts = setInterval("atualizaGhosts()",
-        Math.round(intervalo * 0.2));
+        Math.round(intervalo * velocidadeFantasma));
     btPausa.innerHTML = "Pausar";
 
     if (audioWaka.duration > 0 && !audioWaka.paused) {
@@ -249,6 +249,7 @@ function atualizaPacman() {
 
 function winGame() {
     pausar();
+    velocidadeFantasma = velocidadeFantasma - 0.1;
     initGame();
 }
 

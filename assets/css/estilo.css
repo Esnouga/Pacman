@@ -86,6 +86,9 @@ audio{
 .presenters{
 	font-size: 15px;
 	font-family: cursive;
+	width: 200px;
+	float: right;
+	white-space: normal !important;
 }
 
 .shortcut-and-info{
@@ -93,7 +96,9 @@ audio{
 	width: 300px;
 	right: 20px;
 	top: 1%;
-	white-space: normal !important
+	width: 200px;
+    float: right;
+	white-space: normal !important;
 }
 
 .shortcuts{
