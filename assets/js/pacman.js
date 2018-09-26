@@ -340,6 +340,7 @@ function gameOver() {
     btPausa.disabled = true;
     btPausa.innerHTML = "Game Over!";
     score = 0;
+    velocidadeFantasma = 1.2;
     document.getElementById("score").innerHTML = score;
     document.querySelector('#gameOver').classList.remove('gameOverDisplayNone');
     document.querySelector('#gameOver').classList.add('gameOverDisplayShow');
