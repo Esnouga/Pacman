@@ -9,6 +9,7 @@ var introMusic = document.getElementById("intro");
 var audioPacDie = document.getElementById("pacDie");
 var audioEatGhost = document.getElementById("eatGhost");
 var score = 0;
+var qtdPontos = 0;
 
 introMusic.currentTime = 0;
 audioWaka.currentTime = 0;
@@ -38,6 +39,7 @@ function initGame() {
     document.querySelector('#gameOver').classList.remove('gameOverDisplayShow');
     document.querySelector('#gameOver').classList.add('gameOverDisplayNone');
     score = 0;
+    qtdPontos = 0;
     Cenario.mapa = new Array();
 
     for (i = 0; i < cenarioCriado.length; i++) {
@@ -96,6 +98,7 @@ parede.src = "assets/img/parede.png";
 
 function desenharTudo() {
 	//Limpar a tela
+    qtdPontos = 0;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//Cenário
 	for (y = 0; y < ny; y++) {
@@ -104,8 +107,10 @@ function desenharTudo() {
 				ctx.drawImage(parede, x * largura, y * largura, largura, largura);
 			} else if (Cenario.mapa[y][x] == Cenario.ponto) {
 				ctx.drawImage(ponto, x * largura, y * largura, largura, largura);
+				qtdPontos++;
 			} else if (Cenario.mapa[y][x] == Cenario.poder) {
 				ctx.drawImage(poder, x * largura, y * largura, largura,largura);
+                qtdPontos++;
 			}
 		} //else if & for x
 	}
@@ -250,18 +255,31 @@ function atualizaPacman() {
     desenharTudo();
 }
 
+function winGame() {
+    pausar();
+    initGame();
+}
+
 //Retorna verdadeiro para o caso de Game Over
 function verificaColisoes() {
 //Comer ponto?
     if (Cenario.mapa[py][px] == Cenario.ponto) {
         Cenario.mapa[py][px] = Cenario.vazio;
-        score = score + 10;
+        score += 10;
         document.getElementById("score").innerHTML = score;
+        qtdPontos--;
+        if(qtdPontos<=0){
+            winGame();
+        }
 //Ponto do poder?
     } else if (Cenario.mapa[py][px] == Cenario.poder) {
-        score = score + 50;
+        score += 50;
         document.getElementById("score").innerHTML = score;
         Cenario.mapa[py][px] = Cenario.vazio;
+        qtdPontos--;
+        if(qtdPontos<=0){
+            winGame();
+        }
         for (i = 0; i < ghosts.length; i++) {
 
             ghosts[i].assustar();
@@ -273,7 +291,7 @@ function verificaColisoes() {
             if (ghosts[i].assustado == 0) {
                 return true;
             } else {
-                score = score + 200;
+                score += 200;
                 document.getElementById("score").innerHTML = score;
                 audioEatGhost.play();
                 ghosts[i].devorado();
