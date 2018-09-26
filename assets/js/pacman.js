@@ -43,16 +43,8 @@ function novoJogo() {
     score = 0;
     Cenario.mapa = new Array();
 
-	for (i = 0; i < cenarioCriado.length; i++) {
-		Cenario.mapa.push(cenarioCriado[i].slice(0));
-    }
-    
-	nx = Cenario.mapa[0].length;
-	ny = Cenario.mapa.length;
-	canvas.width = nx * largura;
-	canvas.height = ny * largura;
-    ghosts.length = 0;
-    
+    novaFase();
+
     var nGhosts = 0;
 	for (y = 0; y < ny; y++) {
 		for (x = 0; x < nx; x++) {
@@ -234,6 +226,38 @@ function atualizaPacman() {
         gameOver();
     }
     desenharTudo();
+}
+
+function winGame() {
+    pausar();
+    initGame();
+}
+
+//Troca de fase
+function novaFase(){
+    var escolhaRandom = Math.floor(Math.random() * (4 - 1)) + 1;
+
+    if(escolhaRandom == 1){
+        for (i = 0; i < cenarioCriado.length; i++) {
+            Cenario.mapa.push(cenarioCriado[i].slice(0));
+        }
+    
+        nx = Cenario.mapa[0].length;
+        ny = Cenario.mapa.length;
+        canvas.width = nx * largura;
+        canvas.height = ny * largura;
+        ghosts.length = 0;
+    } else if(escolhaRandom == 2){
+        for (i = 0; i < cenarioCriado.length; i++) {
+            Cenario.mapa.push(cenarioCriado1[i].slice(0));
+        }
+    
+        nx = Cenario.mapa[0].length;
+        ny = Cenario.mapa.length;
+        canvas.width = nx * largura;
+        canvas.height = ny * largura;
+        ghosts.length = 0;
+    }
 }
 
 //Retorna verdadeiro para o caso de Game Over
