@@ -19,15 +19,21 @@ var relogioGhosts = null;
 var nx = 0, ny = 0; //Número de colunas e linhas
 var pacManR = new Image();
 pacManR.src = "assets/img/pacR.png";
+var pacManR2 = new Image();
+pacManR2.src = "assets/img/pacR2.png";
 
 var pacManL = new Image();
 pacManL.src = "assets/img/pacL.png";
+var pacManL2 = new Image();
+pacManL2.src = "assets/img/pacL2.png";
 
 var pacManU = new Image();
 pacManU.src = "assets/img/pacU.png";
 
 var pacManD = new Image();
 pacManD.src = "assets/img/pacD.png";
+var pacManD2 = new Image();
+pacManD2.src = "assets/img/pacD2.png";
 
 var desenhoPac = pacManR;
 
@@ -144,7 +150,10 @@ function onKD(evt) {
 
 function moverPacman() {
     if (setaDireita) {
-        desenhoPac = pacManR
+        desenhoPac = pacManR;
+        setTimeout(()=>{
+            desenhoPac = pacManR2;
+        },50)
         setaDireita = false;
         if (px + 1 < nx) {
             if (Cenario.mapa[py][px + 1] != Cenario.parede) {
@@ -156,6 +165,9 @@ function moverPacman() {
     }
     if (setaEsquerda) {
         desenhoPac = pacManL;
+        setTimeout(()=>{
+            desenhoPac = pacManL2;
+        },50)
         setaEsquerda = false;
         if (px - 1 >= 0) {
             if (Cenario.mapa[py][px - 1] != Cenario.parede) {
@@ -178,6 +190,9 @@ function moverPacman() {
     }
     if (setaBaixo) {
         desenhoPac = pacManD;
+        setTimeout(()=>{
+            desenhoPac = pacManD2;
+        },50)
         setaBaixo = false;
         if (py + 1 < ny) {
             if (Cenario.mapa[py + 1][px] != Cenario.parede) {
