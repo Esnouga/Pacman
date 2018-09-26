@@ -8,8 +8,6 @@ var audioWaka = document.getElementById("waka");
 var introMusic = document.getElementById("intro");
 var audioPacDie = document.getElementById("pacDie");
 var audioEatGhost = document.getElementById("eatGhost");
-var score = 0;
-var qtdPontos = 0;
 
 introMusic.currentTime = 0;
 audioWaka.currentTime = 0;
@@ -34,47 +32,43 @@ var desenhoPac = pacManR;
 var px = -1, py = -1;
 var ghosts = new Array(); //Armazena referencias dos Ghosts
 
-function initGame() {
+function novoJogo() {
+    pausar();
+    var score = 0;
+    resetSoms();
+    introMusic.play();
     document.getElementById("score").innerHTML = score;
     document.querySelector('#gameOver').classList.remove('gameOverDisplayShow');
     document.querySelector('#gameOver').classList.add('gameOverDisplayNone');
     score = 0;
-    qtdPontos = 0;
     Cenario.mapa = new Array();
 
-    for (i = 0; i < cenarioCriado.length; i++) {
-        Cenario.mapa.push(cenarioCriado[i].slice(0));
+	for (i = 0; i < cenarioCriado.length; i++) {
+		Cenario.mapa.push(cenarioCriado[i].slice(0));
     }
-
-    nx = Cenario.mapa[0].length;
-    ny = Cenario.mapa.length;
-    canvas.width = nx * largura;
-    canvas.height = ny * largura;
+    
+	nx = Cenario.mapa[0].length;
+	ny = Cenario.mapa.length;
+	canvas.width = nx * largura;
+	canvas.height = ny * largura;
     ghosts.length = 0;
-
+    
     var nGhosts = 0;
-    for (y = 0; y < ny; y++) {
-        for (x = 0; x < nx; x++) {
-            if (Cenario.mapa[y][x] == Cenario.pacman) {
-                px = x;
-                py = y;
-            }
-            if (Cenario.mapa[y][x] == Cenario.ghost) {
-                ghosts.push(new Ghost(x, y,
-                    Ghost.imagem[nGhosts++]));
-            }
-
-        }
+	for (y = 0; y < ny; y++) {
+		for (x = 0; x < nx; x++) {
+			if (Cenario.mapa[y][x] == Cenario.pacman) {
+				px = x;
+				py = y;
+			}
+			if (Cenario.mapa[y][x] == Cenario.ghost) {
+				ghosts.push(new Ghost(x, y,
+					Ghost.imagem[nGhosts++]));
+			}
+					
+		}
     }
 
     desenharTudo();
-}
-
-function novoJogo() {
-    pausar();
-    resetSoms();
-    introMusic.play();
-    initGame();
 
     introMusic.addEventListener('ended', function() {
         startStop();
@@ -98,7 +92,6 @@ parede.src = "assets/img/parede.png";
 
 function desenharTudo() {
 	//Limpar a tela
-    qtdPontos = 0;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//Cenário
 	for (y = 0; y < ny; y++) {
@@ -107,10 +100,8 @@ function desenharTudo() {
 				ctx.drawImage(parede, x * largura, y * largura, largura, largura);
 			} else if (Cenario.mapa[y][x] == Cenario.ponto) {
 				ctx.drawImage(ponto, x * largura, y * largura, largura, largura);
-				qtdPontos++;
 			} else if (Cenario.mapa[y][x] == Cenario.poder) {
 				ctx.drawImage(poder, x * largura, y * largura, largura,largura);
-                qtdPontos++;
 			}
 		} //else if & for x
 	}
@@ -130,23 +121,17 @@ var setaBaixo = false;
 var setaEsquerda = false;
 var setaDireita = false;
 function onKD(evt) {
-	if (evt.keyCode == Teclas.direita && paused == false) {
+	if (evt.keyCode == Teclas.direita) {
 		setaDireita = true;
 	}
-	if (evt.keyCode == Teclas.esquerda && paused == false) {
+	if (evt.keyCode == Teclas.esquerda) {
 		setaEsquerda = true;
 	}
-	if (evt.keyCode == Teclas.cima && paused == false) {
+	if (evt.keyCode == Teclas.cima) {
 		setaCima = true;
 	}
-	if (evt.keyCode == Teclas.baixo && paused == false) {
+	if (evt.keyCode == Teclas.baixo) {
 		setaBaixo = true;
-	}
-	if (evt.keyCode == Teclas.space) {
-		novoJogo();
-	}
-	if (evt.keyCode == Teclas.control) {
-        startStop();
 	}
 }
 
@@ -228,14 +213,10 @@ function retomar(){
 }
 
 function startStop(){
-    if(document.getElementById('btPausa').innerHTML == "Iniciar"){
-        novoJogo();
-    }else {
-        if(paused){
-            retomar();
-        }else{
-            pausar();
-        }
+    if(paused){
+        retomar();
+    }else{
+        pausar();
     }
 }
 function atualizaGhosts() {
@@ -255,31 +236,18 @@ function atualizaPacman() {
     desenharTudo();
 }
 
-function winGame() {
-    pausar();
-    initGame();
-}
-
 //Retorna verdadeiro para o caso de Game Over
 function verificaColisoes() {
 //Comer ponto?
     if (Cenario.mapa[py][px] == Cenario.ponto) {
         Cenario.mapa[py][px] = Cenario.vazio;
-        score += 10;
+        score = score + 10;
         document.getElementById("score").innerHTML = score;
-        qtdPontos--;
-        if(qtdPontos<=0){
-            winGame();
-        }
 //Ponto do poder?
     } else if (Cenario.mapa[py][px] == Cenario.poder) {
-        score += 50;
+        score = score + 50;
         document.getElementById("score").innerHTML = score;
         Cenario.mapa[py][px] = Cenario.vazio;
-        qtdPontos--;
-        if(qtdPontos<=0){
-            winGame();
-        }
         for (i = 0; i < ghosts.length; i++) {
 
             ghosts[i].assustar();
@@ -291,7 +259,7 @@ function verificaColisoes() {
             if (ghosts[i].assustado == 0) {
                 return true;
             } else {
-                score += 200;
+                score = score + 200;
                 document.getElementById("score").innerHTML = score;
                 audioEatGhost.play();
                 ghosts[i].devorado();
@@ -324,5 +292,3 @@ function resetSoms(){
     audioWaka.currentTime = 0;
     introMusic.currentTime = 0;
 }
-
-initGame();
