@@ -10,7 +10,8 @@
 }
 
 body{
-	background-color: #DDFFDD;
+	background-image: url("../../assets/img/bgPac.jpg");
+    background-size: cover;
 	text-align: center;
 }
 #tela{
@@ -84,6 +85,7 @@ audio{
 }
 
 .presenters{
+    color: white;
 	font-size: 15px;
 	font-family: cursive;
 	width: 200px;
@@ -99,6 +101,7 @@ audio{
 	width: 200px;
     float: right;
 	white-space: normal !important;
+    color: white;
 }
 
 .shortcuts{
