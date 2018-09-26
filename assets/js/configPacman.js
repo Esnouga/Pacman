@@ -28,3 +28,5 @@ Teclas.cima = 38;
 Teclas.baixo = 40;
 Teclas.esquerda = 37;
 Teclas.direita = 39;
+Teclas.space = 32;
+Teclas.control = 17;

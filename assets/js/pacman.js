@@ -8,6 +8,7 @@ var audioWaka = document.getElementById("waka");
 var introMusic = document.getElementById("intro");
 var audioPacDie = document.getElementById("pacDie");
 var audioEatGhost = document.getElementById("eatGhost");
+var score = 0;
 
 introMusic.currentTime = 0;
 audioWaka.currentTime = 0;
@@ -32,43 +33,46 @@ var desenhoPac = pacManR;
 var px = -1, py = -1;
 var ghosts = new Array(); //Armazena referencias dos Ghosts
 
-function novoJogo() {
-    pausar();
-    var score = 0;
-    resetSoms();
-    introMusic.play();
+function initGame() {
     document.getElementById("score").innerHTML = score;
     document.querySelector('#gameOver').classList.remove('gameOverDisplayShow');
     document.querySelector('#gameOver').classList.add('gameOverDisplayNone');
     score = 0;
     Cenario.mapa = new Array();
 
-	for (i = 0; i < cenarioCriado.length; i++) {
-		Cenario.mapa.push(cenarioCriado[i].slice(0));
+    for (i = 0; i < cenarioCriado.length; i++) {
+        Cenario.mapa.push(cenarioCriado[i].slice(0));
     }
-    
-	nx = Cenario.mapa[0].length;
-	ny = Cenario.mapa.length;
-	canvas.width = nx * largura;
-	canvas.height = ny * largura;
+
+    nx = Cenario.mapa[0].length;
+    ny = Cenario.mapa.length;
+    canvas.width = nx * largura;
+    canvas.height = ny * largura;
     ghosts.length = 0;
-    
+
     var nGhosts = 0;
-	for (y = 0; y < ny; y++) {
-		for (x = 0; x < nx; x++) {
-			if (Cenario.mapa[y][x] == Cenario.pacman) {
-				px = x;
-				py = y;
-			}
-			if (Cenario.mapa[y][x] == Cenario.ghost) {
-				ghosts.push(new Ghost(x, y,
-					Ghost.imagem[nGhosts++]));
-			}
-					
-		}
+    for (y = 0; y < ny; y++) {
+        for (x = 0; x < nx; x++) {
+            if (Cenario.mapa[y][x] == Cenario.pacman) {
+                px = x;
+                py = y;
+            }
+            if (Cenario.mapa[y][x] == Cenario.ghost) {
+                ghosts.push(new Ghost(x, y,
+                    Ghost.imagem[nGhosts++]));
+            }
+
+        }
     }
 
     desenharTudo();
+}
+
+function novoJogo() {
+    pausar();
+    resetSoms();
+    introMusic.play();
+    initGame();
 
     introMusic.addEventListener('ended', function() {
         startStop();
@@ -121,17 +125,23 @@ var setaBaixo = false;
 var setaEsquerda = false;
 var setaDireita = false;
 function onKD(evt) {
-	if (evt.keyCode == Teclas.direita) {
+	if (evt.keyCode == Teclas.direita && paused == false) {
 		setaDireita = true;
 	}
-	if (evt.keyCode == Teclas.esquerda) {
+	if (evt.keyCode == Teclas.esquerda && paused == false) {
 		setaEsquerda = true;
 	}
-	if (evt.keyCode == Teclas.cima) {
+	if (evt.keyCode == Teclas.cima && paused == false) {
 		setaCima = true;
 	}
-	if (evt.keyCode == Teclas.baixo) {
+	if (evt.keyCode == Teclas.baixo && paused == false) {
 		setaBaixo = true;
+	}
+	if (evt.keyCode == Teclas.space) {
+		novoJogo();
+	}
+	if (evt.keyCode == Teclas.control) {
+        startStop();
 	}
 }
 
@@ -213,10 +223,14 @@ function retomar(){
 }
 
 function startStop(){
-    if(paused){
-        retomar();
-    }else{
-        pausar();
+    if(document.getElementById('btPausa').innerHTML == "Iniciar"){
+        novoJogo();
+    }else {
+        if(paused){
+            retomar();
+        }else{
+            pausar();
+        }
     }
 }
 function atualizaGhosts() {
@@ -292,3 +306,5 @@ function resetSoms(){
     audioWaka.currentTime = 0;
     introMusic.currentTime = 0;
 }
+
+initGame();

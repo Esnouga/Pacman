@@ -16,6 +16,8 @@ body{
 #tela{
 	background-color: black;
 	border: 1px solid red;
+	width: 50%;
+	height: auto;
 }
 button{
 	background-color: #9999EE;
@@ -78,4 +80,40 @@ audio{
 	z-index: 40;
 	top: 100px;
 	left: 500px;
+}
+
+.presenters{
+	font-size: 15px;
+	font-family: cursive;
+}
+
+.shortcut-and-info{
+	position: absolute;
+	right: 20px;
+	top: 1%;
+}
+
+.shortcuts{
+	font-size: 25px;
+}
+
+.shortcuts > p{
+	font-size: 15px;
+	font-family: fantasy;
+}
+
+@media (max-width: 1400px) {
+	.scoreCard{
+		top: 2px;
+		left: 40%;
+	}
+	#tela{
+		margin-top: 100px;
+	}
+	.shortcut-and-info h3{
+		font-size: 80% !important;
+	}
+	.shortcut-and-info p{
+		font-size: 60% !important;
+	}
 }
