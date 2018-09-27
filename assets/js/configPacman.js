@@ -24,9 +24,9 @@ Direcao.direita = 3;
 //Configurações das teclas
 var Teclas = function () {
 }
-Teclas.cima = 38;
-Teclas.baixo = 40;
-Teclas.esquerda = 37;
-Teclas.direita = 39;
+Teclas.cima = 87;
+Teclas.baixo = 83;
+Teclas.esquerda = 65;
+Teclas.direita = 68;
 Teclas.space = 32;
 Teclas.control = 17;
