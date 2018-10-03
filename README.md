@@ -2,7 +2,6 @@
 jogo do Pacman para entrega DW1
 
 Entrega provável(02/10/2018)
-http://docente.ifsc.edu.br/vilson.junior/pi/material/pacman/
 Será desenvolvido em aula, porém vai ter falta xD
 
 
